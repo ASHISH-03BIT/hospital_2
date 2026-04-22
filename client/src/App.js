@@ -2,27 +2,7 @@ import { Navigate, Route, BrowserRouter as Router, Routes } from "react-router-d
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 
-const Home = () => {
-  const token = localStorage.getItem("token");
-
-  return (
-    <div>
-      <h1>Hospital Management System</h1>
-      <p>{token ? "You are authenticated." : "Please login or signup."}</p>
-      {token && (
-        <button
-          type="button"
-          onClick={() => {
-            localStorage.removeItem("token");
-            window.location.href = "/login";
-          }}
-        >
-          Logout
-        </button>
-      )}
-    </div>
-  );
-};
+import Home from "./pages/Home";
 
 const App = () => {
   return (
