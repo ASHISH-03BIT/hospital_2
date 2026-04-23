@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      default: "patient",
+      default: "student",
       trim: true,
     },
   },

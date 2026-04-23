@@ -46,7 +46,7 @@ const signup = async (req, res, next) => {
       name: name.trim(),
       email: normalizedEmail,
       password: hashedPassword,
-      role: "patient",
+      role: "student",
     });
 
     const token = generateToken(user);

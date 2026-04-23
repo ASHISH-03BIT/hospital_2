@@ -26,7 +26,7 @@ const Login = () => {
 
     try {
       await loginUser(form);
-      navigate("/");
+      navigate("/dashboard");
     } catch (err) {
       setError(err.message || "Login failed");
     } finally {
@@ -39,7 +39,7 @@ const Login = () => {
       <main className="main-content">
         <div className="glass-card">
           <h2>Welcome Back</h2>
-          <p className="subtitle">Securely access your hospital portal</p>
+          <p className="subtitle">Securely access your campus portal</p>
           
           <form onSubmit={handleSubmit}>
             {error && (
@@ -57,7 +57,7 @@ const Login = () => {
                 name="email"
                 value={form.email}
                 onChange={handleChange}
-                placeholder="doctor@hospital.com"
+                placeholder="doctor@campus.com"
                 required
               />
             </div>
