@@ -1,94 +1,87 @@
-# 🏥 Hospital Patient Management System (MERN)
+# College Lost and Found System (MERN)
 
-This project now runs as a **single deployable service** on Render:
-- **Backend**: Node.js + Express + MongoDB
-- **Frontend**: React app built from `client/` and served by Express in production
+A full-stack application for managing campus lost and found reports.
 
-## 📁 Project Structure
+## Features
+
+- Authentication (Signup/Login with JWT)
+- Report Lost Items
+- Report Found Items
+- Browse lost/found lists
+- Item detail view
+- Claim/resolve workflow
+- Search and category filtering
+- View own posts via `?mine=true` query on list APIs
+
+## Project Structure
 
 ```text
 hospital_2/
 ├── client/
-│   ├── public/
-│   │   └── index.html
 │   ├── src/
-│   │   ├── App.js
 │   │   ├── pages/
-│   │   │   ├── Login.js
-│   │   │   └── Signup.js
-│   │   └── services/
-│   │       └── authService.js
-│   └── package.json
+│   │   ├── services/
+│   │   ├── App.js
+│   │   └── index.css
 ├── config/
 ├── controllers/
+│   ├── authController.js
+│   └── itemController.js
 ├── middleware/
 ├── models/
+│   ├── User.js
+│   ├── LostItem.js
+│   └── FoundItem.js
 ├── routes/
+│   ├── authRoutes.js
+│   └── itemRoutes.js
 ├── server.js
 └── package.json
 ```
 
-## ⚙️ Root Scripts
+## API Endpoints
 
-```bash
-npm run build   # cd client && npm install && npm run build
-npm start       # node server.js
-```
+### Auth
+- `POST /auth/signup`
+- `POST /auth/login`
 
-## 🚀 Local Development
+### Lost/Found
+- `POST /api/lost-items`
+- `GET /api/lost-items`
+- `GET /api/lost-items/:id`
+- `POST /api/found-items`
+- `GET /api/found-items`
+- `PUT /api/items/:id/claim`
 
-### 1) Backend
+All lost/found routes require `Authorization: Bearer <token>`.
+
+## Run Locally
+
+1. Install dependencies
 ```bash
 npm install
+cd client && npm install && cd ..
+```
+
+2. Configure environment (`.env`)
+```bash
+MONGO_URI=your_mongodb_connection
+JWT_SECRET=your_jwt_secret
+PORT=5000
+NODE_ENV=development
+```
+
+3. Start backend
+```bash
 npm run dev
 ```
 
-### 2) Frontend (optional local dev server)
+4. Start frontend (optional separate dev server)
 ```bash
 cd client
-npm install
 npm start
 ```
 
-## 🏗️ Production Build
-
-```bash
-cd client
-npm install
-npm run build
-```
-
-This generates:
-
-```text
-client/build/
-```
-
-In production, Express serves these static assets and uses a fallback route for React Router.
-
-## 🌐 Render Deployment (Single Web Service)
-
-1. Push this repo to GitHub.
-2. In Render, create/update a **Web Service** pointing to this repo.
-3. Configure:
-   - **Build Command**: `npm run build`
-   - **Start Command**: `npm start`
-4. Set environment variables:
-   - `NODE_ENV=production`
-   - `MONGO_URI=...`
-   - `JWT_SECRET=...`
-   - (Optional) `PORT` is provided by Render automatically.
-5. Deploy.
-
-After deploy:
-- `https://your-render-url/` loads the React frontend.
-- `https://your-render-url/login` and `/signup` work via React Router fallback.
-- API routes still work (for example `POST /auth/login`, `POST /auth/signup`, `GET /api/patients`).
-
-## ✅ API Endpoints (unchanged)
-
-- `POST /auth/signup`
-- `POST /auth/login`
-- `GET /api/patients`
-- `POST /api/patients`
-- `GET /api/health`
+## Notes
+- `image` is currently stored as URL text (optional).
+- You can filter list APIs with `q`, `category`, and `mine=true`.

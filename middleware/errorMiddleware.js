@@ -39,7 +39,7 @@ const errorHandler = (err, req, res, next) => {
   if (err.code === 11000) {
     statusCode = 400;
     const field = Object.keys(err.keyValue)[0];
-    message = `A patient with this ${field} already exists`;
+    message = `A record with this ${field} already exists`;
   }
 
   // Invalid MongoDB ObjectId

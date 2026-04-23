@@ -1,7 +1,7 @@
 {
-  "name": "hospital-patient-management-backend",
+  "name": "college-lost-and-found-backend",
   "version": "1.0.0",
-  "description": "Production-ready backend for Hospital Patient Record Management System",
+  "description": "Backend for College Lost and Found System",
   "main": "server.js",
   "scripts": {
     "postinstall": "cd client && npm install && npm run build",
@@ -10,11 +10,11 @@
     "dev": "nodemon server.js"
   },
   "keywords": [
-    "hospital",
-    "patient",
-    "management",
-    "REST API",
-    "MongoDB"
+    "college",
+    "lost-and-found",
+    "mongodb",
+    "express",
+    "react"
   ],
   "author": "Your Name",
   "license": "ISC",

@@ -31,7 +31,7 @@ const Signup = () => {
 
     try {
       await signupUser(form);
-      navigate("/");
+      navigate("/dashboard");
     } catch (err) {
       setError(err.message || "Signup failed");
     } finally {
@@ -44,7 +44,7 @@ const Signup = () => {
       <main className="main-content">
         <div className="glass-card">
           <h2>Create Account</h2>
-          <p className="subtitle">Join the Hospital Management System</p>
+          <p className="subtitle">Join the College Lost & Found System</p>
           
           <form onSubmit={handleSubmit}>
             {error && (
@@ -62,7 +62,7 @@ const Signup = () => {
                 name="name"
                 value={form.name}
                 onChange={handleChange}
-                placeholder="Dr. Jane Doe"
+                placeholder="Alex Student"
                 required
               />
             </div>
@@ -75,7 +75,7 @@ const Signup = () => {
                 name="email"
                 value={form.email}
                 onChange={handleChange}
-                placeholder="doctor@hospital.com"
+                placeholder="doctor@campus.com"
                 required
               />
             </div>

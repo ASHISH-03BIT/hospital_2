@@ -1,13 +1,10 @@
-// ============================================================
-// server.js — Application Entry Point
-// ============================================================
 require("dotenv").config();
 
 const path = require("path");
 const express = require("express");
 const connectDB = require("./config/db");
-const patientRoutes = require("./routes/patientRoutes");
 const authRoutes = require("./routes/authRoutes");
+const itemRoutes = require("./routes/itemRoutes");
 const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 
 const app = express();
@@ -25,28 +22,22 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use((req, res, next) => {
-  console.log(`📨 [${new Date().toISOString()}] ${req.method} ${req.originalUrl}`);
-  next();
-});
-
-// API health check route
 app.get("/api/health", (req, res) => {
   res.json({
     success: true,
-    message: "🏥 Hospital Patient Management API is running!",
+    message: "College Lost and Found API is running!",
     version: "1.0.0",
     endpoints: {
-      patients: "/api/patients",
-      search: "/api/patients/search?name=xyz OR ?disease=xyz",
       auth: "/auth",
+      lostItems: "/api/lost-items",
+      foundItems: "/api/found-items",
+      claim: "/api/items/:id/claim",
     },
   });
 });
 
-// API routes
 app.use("/auth", authRoutes);
-app.use("/api/patients", patientRoutes);
+app.use("/api", itemRoutes);
 
 app.use(express.static(path.join(__dirname, "client/build")));
 
@@ -60,11 +51,5 @@ app.use(errorHandler);
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-  console.log("============================================================");
-  console.log("🏥  Hospital Patient Management System — Backend + Frontend");
-  console.log("============================================================");
-  console.log(`🚀 Server running in ${process.env.NODE_ENV || "development"} mode`);
-  console.log(`🌐 Server URL: http://localhost:${PORT}`);
-  console.log(`📋 Patients API: http://localhost:${PORT}/api/patients`);
-  console.log("============================================================");
+  console.log(`Server running on http://localhost:${PORT}`);
 });
